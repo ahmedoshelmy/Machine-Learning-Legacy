@@ -38,3 +38,27 @@ history.add_user_message("What is a list comprehension?")
 history.add_user_message("Describe the same in fewer words")
 response = llm.invoke(history.messages)
 print(response.content)
+
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, api_key='<OPENAI_API_TOKEN>')
+
+# Define a buffer memory
+memory = ConversationBufferMemory(size=4)
+
+# Define the chain for integrating the memory with the model
+buffer_chain = ConversationChain(llm=llm,memory=memory)
+
+# Invoke the chain with the inputs provided
+buffer_chain.invoke("Write Python code to draw a scatter plot.")
+buffer_chain.invoke("Use the Seaborn library.")
+
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, api_key='openai_api_key')
+
+# Define a summary memory that uses an OpenAI chat model
+memory = ConversationSummaryMemory(llm=llm)
+
+# Define the chain for integrating the memory with the model
+summary_chain = ConversationChain(llm=llm,memory=memory,verbose=True)
+
+# Invoke the chain with the inputs provided
+summary_chain.invoke("Describe the relationship of the human mind with the keyboard when taking a great online class.")
+summary_chain.invoke("Use an analogy to describe it.")
