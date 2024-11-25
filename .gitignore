@@ -1,1 +1,4 @@
-DataCamp/LLMs/Vector Databases/.env
+*/*/*/.env
+*/*/.env
+*/.env
+
